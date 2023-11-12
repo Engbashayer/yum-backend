@@ -1,4 +1,4 @@
-const mangoose = require("mangoose");
+const mongoose = require("mongoose");
 
 const IngredientSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
@@ -16,4 +16,4 @@ const IngredientSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("Ingredient", ChefSchema);
+module.exports = mongoose.model("Ingredient", IngredientSchema);

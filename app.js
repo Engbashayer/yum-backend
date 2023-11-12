@@ -10,8 +10,9 @@ const errorHandler = require("./middlewares/errorHandler");
 const passport = require("passport");
 const { localStrategy, jWTStrategy } = require("./middlewares/passport");
 const router = require("./api/recipe/recipe.routes");
-
-app.use("api/category", categoryrouter);
+const path = require("path");
+const morgan = require("morgan");
+const cors = require("cors");
 
 connectDB();
 app.use("/media", express.static(path.join(__dirname, "media")));

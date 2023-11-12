@@ -9,7 +9,7 @@ const {
   recipesDelete,
   recipesUpdate,
   fetchRecipe,
-} = require("./recipes.controllers");
+} = require("./recipe.controllers");
 
 router.param("recipeId", async (req, res, next, recipeId) => {
   const recipe = await fetchRecipe(recipeId, next);
