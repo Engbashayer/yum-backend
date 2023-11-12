@@ -51,3 +51,16 @@ exports.fetchRecipe = async (recipeId, next) => {
     next(error);
   }
 };
+
+//addrecipetoingredients
+
+exports.addrecipetoingredients = async (req, res, next) => {
+  try {
+    await req.Recipe.updateOne({ $push: { ingredients: req.ingredients } });
+    await req.ingredient.updateOne({ $push: { recipes: req.recipes } });
+
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};

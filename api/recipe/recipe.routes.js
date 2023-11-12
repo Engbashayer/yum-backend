@@ -9,6 +9,7 @@ const {
   recipesDelete,
   recipesUpdate,
   fetchRecipe,
+  addrecipetoingredients,
 } = require("./recipe.controllers");
 
 router.param("recipeId", async (req, res, next, recipeId) => {
@@ -23,5 +24,6 @@ router.post("/", upload.single("image"), recipesCreate);
 router.delete("/:recipeId", recipesDelete);
 
 router.put("/:recipeId", recipesUpdate);
+router.put("/:recipeId/:ingredientId", addrecipetoingredients);
 
 module.exports = router;

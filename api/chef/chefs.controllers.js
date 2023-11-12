@@ -48,3 +48,13 @@ exports.getChefs = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.recipeCreate = async (req, res, next) => {
+  try {
+    const newRecipe = await Recipe.create(req.body);
+    await req.Chef.updateOne({ $push: { recipes: newRecipe } });
+    res.status(201).json(req.chef);
+  } catch (error) {
+    next(error);
+  }
+};
