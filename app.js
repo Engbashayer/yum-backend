@@ -10,7 +10,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const passport = require("passport");
 const { localStrategy, jWTStrategy } = require("./middlewares/passport");
 
-app.use("api/category", categoryrouter);
+app.use("/api", categoryrouter);
 
 connectDB();
 app.use("/media", express.static(path.join(__dirname, "media")));
