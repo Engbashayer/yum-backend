@@ -26,7 +26,7 @@ const RecipeSchema = new mongoose.Schema({
   ],
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Ingredient",
+    ref: "Category",
   },
   instructions: { type: String, required: true },
 });

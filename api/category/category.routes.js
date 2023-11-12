@@ -7,6 +7,8 @@ const {
   updateCategory,
   deleteCategory,
   fetchCategory,
+
+  addrecipeToCategory,
 } = require("./category.controllers");
 const categoryroutes = express.Router();
 
@@ -21,4 +23,6 @@ categoryroutes.post("/category", createOneCategory);
 // categoryroutes.get("/category/:id", getOneCategory);
 categoryroutes.put("/category/:id", updateCategory);
 // categoryroutes.delete("/category/:id", deleteCategory);
+
+router.post("/:categoryId", addrecipeToCategory);
 module.exports = categoryroutes;
