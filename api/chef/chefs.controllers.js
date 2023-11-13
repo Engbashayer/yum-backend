@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
     req.body.password = hassMyPw;
     const newChef = await Chef.create(req.body);
 
-    const token = generatToken(newChef);
+    const token = generateToken(newChef);
     res.status(201).json({ token });
   } catch (err) {
     next(err);
