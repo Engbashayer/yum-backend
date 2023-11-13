@@ -10,7 +10,12 @@ const {
   recipeCreate,
 } = require("./chefs.controllers");
 
-router.post("/signup", signup);
+router.post(
+  "/signup",
+
+  signup
+);
+
 router.post(
   "/signin",
   passport.authenticate("local", { session: false }),

@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const categoryrouter = express.Router();
 const {
   getAllCategories,
   createOneCategory,
@@ -13,17 +13,18 @@ const {
 
 // const categoryroutes = express.Router();
 
-router.param("categoryId", async (req, res, next, categoryId) => {
+categoryrouter.param("categoryId", async (req, res, next, categoryId) => {
   const category = await fetchCategory(categoryId, next);
   req.category = category;
   next();
 });
 
-router.get("/categories", getAllCategories);
-router.post("/category", createOneCategory);
+categoryrouter.get("/categories", getAllCategories);
+categoryrouter.post("/", createOneCategory);
 // categoryroutes.get("/category/:id", getOneCategory);
-router.put("/category/:id", updateCategory);
+categoryrouter.put("/category/:id", updateCategory);
 // categoryroutes.delete("/category/:id", deleteCategory);
 
-router.post("/:categoryId", addrecipeToCategory);
-module.exports = router;
+/// not tested
+categoryrouter.post("/:categoryId", addrecipeToCategory);
+module.exports = categoryrouter;

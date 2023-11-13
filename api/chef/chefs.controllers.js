@@ -1,6 +1,7 @@
 const Chef = require("../../models/chef");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const chef = require("../../models/chef");
 require("dotenv").config();
 
 const hashPassWord = async (pw) => {
@@ -20,10 +21,13 @@ exports.signup = async (req, res, next) => {
   try {
     const hassMyPw = await hashPassWord(req.body.password);
     req.body.password = hassMyPw;
-    const newChef = await Chef.create(req.body);
-
-    const token = generateToken(newChef);
-    res.status(201).json({ token });
+    console.log(req.body);
+    const newchef = await Chef.create(req.body);
+    // const newChef = await Chef.create(req.body);
+    // console.log(req.body);
+    const token = generateToken(newchef);
+    console.log(token);
+    return res.status(201).json({ token });
   } catch (err) {
     next(err);
   }
@@ -42,7 +46,8 @@ exports.signin = async (req, res, next) => {
 
 exports.getChefs = async (req, res, next) => {
   try {
-    const chefs = await Chef.find().populate("recipes");
+    const chefs = await Chef.find();
+    // const chefs = await Chef.find().populate("recipes");
     res.status(201).json(chefs);
   } catch (err) {
     next(err);

@@ -15,7 +15,7 @@ exports.recipesCreate = async (req, res, next) => {
       req.body.image = req.file.path.replace("\\", "/");
     }
     const newRecipe = await Recipe.create(req.body);
-    res.status(201).json(newRecipe);
+    return res.status(201).json(newRecipe);
   } catch (error) {
     next(error);
   }
@@ -23,8 +23,8 @@ exports.recipesCreate = async (req, res, next) => {
 
 exports.recipesDelete = async (req, res, next) => {
   try {
-    await req.recipe.deleteOne();
-    res.status(204).end();
+    await req.Recipe.deleteOne();
+    return res.status(204).end();
   } catch (error) {
     next(error);
   }

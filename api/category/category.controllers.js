@@ -10,6 +10,7 @@ exports.createOneCategory = async (req, res, next) => {
     // if (req.file) {
     //   req.body.image = req.file.path.replace("\\", "/");
     // }
+    console.log(req.body);
     const newCategory = await Category.create(req.body);
     res.status(201).json(newCategory);
   } catch (error) {
@@ -46,15 +47,14 @@ exports.fetchCategory = async (categoryId, next) => {
 };
 exports.updateCategory = async (req, res) => {
   const categoryId = req.params.id; // Get the book ID from the request parameters
+
   const updatedCategory = req.body; // Get the updated book details from the request body
   try {
-    const updatedCategory = await Category.findByIdAndUpdate(
+    const updatedoneCategory = await Category.findByIdAndUpdate(
       categoryId,
-      updatedCategory,
-      {
-        new: true, // Return the updated book
-      }
+      updatedCategory
     );
+
     if (!updatedCategory) {
       return res.status(404).json({ error: "Category not found" });
     }
@@ -62,7 +62,7 @@ exports.updateCategory = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: "An error occurred while updating the book." });
+      .json({ error: "An error occurred while updating the category." });
   }
 };
 

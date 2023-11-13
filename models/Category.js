@@ -10,7 +10,7 @@ const CategorySchema = new Schema({
     default:
       "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/health/wp-content/uploads/2022/01/foods_to_eat_to_lose_weight.jpeg",
   },
-  // reciepe: [{ type: Schema.Types.ObjectId, ref: "recipe" }],
+  reciepe: [{ type: Schema.Types.ObjectId, ref: "recipe" }],
 });
 
 module.exports = model("Category", CategorySchema);

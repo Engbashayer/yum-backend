@@ -9,9 +9,8 @@ const notFoundHandler = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
 const passport = require("passport");
 const { localStrategy, jWTStrategy } = require("./middlewares/passport");
-const router = require("./api/recipe/recipe.routes");
+const reciperouter = require("./api/recipe/recipe.routes");
 
-app.use("/api", categoryrouter);
 const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -28,7 +27,7 @@ passport.use("jwt", jWTStrategy);
 app.use("/api", chefRoutes);
 app.use("/api", ingredientRoutes);
 app.use("/api", categoryrouter);
-app.use("/api", router);
+app.use("/api/singlerecipe", reciperouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
