@@ -19,12 +19,16 @@ categoryrouter.param("categoryId", async (req, res, next, categoryId) => {
   next();
 });
 
-categoryrouter.get("/categories", getAllCategories);
-categoryrouter.post("/", createOneCategory);
+categoryrouter.get("/", getAllCategories);
+categoryrouter.post("/c", createOneCategory);
 // categoryroutes.get("/category/:id", getOneCategory);
-categoryrouter.put("/category/:id", updateCategory);
+categoryrouter.put("/:categoryId", updateCategory);
 // categoryroutes.delete("/category/:id", deleteCategory);
 
 /// not tested
-categoryrouter.post("/:categoryId", addrecipeToCategory);
+categoryrouter.post(
+  "/:categoryId",
+
+  addrecipeToCategory
+);
 module.exports = categoryrouter;
