@@ -1,4 +1,5 @@
 const Recipe = require("../../models/Recipe");
+const ingredient = require("../../models/ingredient");
 
 exports.getAllRecipes = async (req, res) => {
   try {
@@ -56,12 +57,17 @@ exports.fetchRecipe = async (recipeId, next) => {
 
 //addrecipetoingredients
 
-exports.addrecipetoingredients = async (req, res, next) => {
+exports.addingredientToRecipe = async (req, res, next) => {
   try {
-    await req.Recipe.updateOne({ $push: { ingredients: req.ingredients } });
-    await req.ingredient.updateOne({ $push: { recipes: req.recipes } });
+    const foundIngredient = await ingredient.findById(req.body.ingredientId);
+    console.log(foundIngredient);
+    const newrec = await req.Recipe.updateOne({
+      $push: { ingredients: foundIngredient._id },
+    });
+    // console.log(newrec);
+    await foundIngredient.updateOne({ $push: { recipes: req.recipes } });
 
-    res.status(204).end();
+    return res.status(204).json(newrec);
   } catch (error) {
     next(error);
   }

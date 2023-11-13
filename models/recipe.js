@@ -26,9 +26,9 @@ const RecipeSchema = new mongoose.Schema({
   ],
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "category",
+    ref: "Category",
   },
   instructions: { type: String, required: true },
 });
 
-module.exports = mongoose.model("recipe", RecipeSchema);
+module.exports = mongoose.model("Recipe", RecipeSchema);

@@ -9,7 +9,8 @@ const {
   recipesDelete,
   recipesUpdate,
   fetchRecipe,
-  addrecipetoingredients,
+
+  addingredientToRecipe,
 } = require("./recipe.controllers");
 
 reciperouter.param("recipeId", async (req, res, next, recipeId) => {
@@ -18,13 +19,13 @@ reciperouter.param("recipeId", async (req, res, next, recipeId) => {
   next();
 });
 
-reciperouter.get("/recipes", getAllRecipes);
+reciperouter.get("/", getAllRecipes);
 
 reciperouter.post("/r", upload.single("image"), recipesCreate);
 
 reciperouter.delete("/:recipeId", recipesDelete);
 
 reciperouter.put("/:recipeId", recipesUpdate);
-reciperouter.put("/:recipeId/:ingredientId", addrecipetoingredients);
+reciperouter.post("/:recipeId", addingredientToRecipe);
 
 module.exports = reciperouter;

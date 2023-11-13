@@ -17,10 +17,10 @@ ingredientRoutes.param("ingredientId", async (req, res, next, ingredientId) => {
   next();
 });
 
-ingredientRoutes.get("/ingrediants", getAllingredients);
+ingredientRoutes.get("/", getAllingredients);
 
 ingredientRoutes.post(
-  "/",
+  "/ing",
 
   upload.single("image"),
 
