@@ -18,9 +18,9 @@ const ChefSchema = new mongoose.Schema({
   recipes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Recipe",
+      ref: "recipe",
     },
   ],
 });
 
-module.exports = mongoose.model("Chef", ChefSchema);
+module.exports = mongoose.model("chef", ChefSchema);

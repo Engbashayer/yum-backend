@@ -7,15 +7,16 @@ exports.getAllCategories = async (req, res) => {
 
 exports.createOneCategory = async (req, res, next) => {
   try {
-    if (req.file) {
-      req.body.image = req.file.path.replace("\\", "/");
-    }
+    // if (req.file) {
+    //   req.body.image = req.file.path.replace("\\", "/");
+    // }
     const newCategory = await Category.create(req.body);
     res.status(201).json(newCategory);
   } catch (error) {
     next(error);
   }
 };
+
 // exports.getOneCategory = async (req, res) => {
 //   const categoryId = req.params.id;
 //   try {

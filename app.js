@@ -27,8 +27,8 @@ passport.use("local", localStrategy);
 passport.use("jwt", jWTStrategy);
 app.use("/api", chefRoutes);
 app.use("/api", ingredientRoutes);
-app.use("api/category", categoryrouter);
-app.use("api", router);
+app.use("/api", categoryrouter);
+app.use("/api", router);
 app.use(notFoundHandler);
 app.use(errorHandler);
 

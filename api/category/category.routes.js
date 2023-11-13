@@ -10,7 +10,8 @@ const {
 
   addrecipeToCategory,
 } = require("./category.controllers");
-const categoryroutes = express.Router();
+
+// const categoryroutes = express.Router();
 
 router.param("categoryId", async (req, res, next, categoryId) => {
   const category = await fetchCategory(categoryId, next);
@@ -18,11 +19,11 @@ router.param("categoryId", async (req, res, next, categoryId) => {
   next();
 });
 
-categoryroutes.get("/categories", getAllCategories);
-categoryroutes.post("/category", createOneCategory);
+router.get("/categories", getAllCategories);
+router.post("/category", createOneCategory);
 // categoryroutes.get("/category/:id", getOneCategory);
-categoryroutes.put("/category/:id", updateCategory);
+router.put("/category/:id", updateCategory);
 // categoryroutes.delete("/category/:id", deleteCategory);
 
 router.post("/:categoryId", addrecipeToCategory);
-module.exports = categoryroutes;
+module.exports = router;

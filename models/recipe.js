@@ -11,7 +11,7 @@ const RecipeSchema = new mongoose.Schema({
   name: { type: String, required: true },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Ingredient",
+    ref: "chef",
   },
   recipeimage: {
     type: String,
@@ -21,14 +21,14 @@ const RecipeSchema = new mongoose.Schema({
   ingredients: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Ingredient",
+      ref: "ingredient",
     },
   ],
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
+    ref: "category",
   },
   instructions: { type: String, required: true },
 });
 
-module.exports = mongoose.model("Recipe", RecipeSchema);
+module.exports = mongoose.model("recipe", RecipeSchema);

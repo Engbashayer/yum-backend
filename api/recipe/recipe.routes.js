@@ -18,7 +18,7 @@ router.param("recipeId", async (req, res, next, recipeId) => {
   next();
 });
 
-router.get("/", getAllRecipes);
+router.get("/recipes", getAllRecipes);
 router.post("/", upload.single("image"), recipesCreate);
 
 router.delete("/:recipeId", recipesDelete);

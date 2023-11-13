@@ -1,8 +1,9 @@
 const Recipe = require("../../models/Recipe");
+const ingredient = require("../../models/ingredient");
 
 exports.getAllingredients = async (req, res, next) => {
   try {
-    const ingredients = await Ingredient.find();
+    const ingredients = await ingredient.find();
     res.status(201).json(ingredients);
   } catch (err) {
     next(err);
@@ -14,7 +15,7 @@ exports.ingredientsCreate = async (req, res, next) => {
     if (req.file) {
       req.body.image = req.file.path.replace("\\", "/");
     }
-    const newIngredient = await Ingredient.create(req.body);
+    const newIngredient = await ingredient.create(req.body);
     res.status(201).json(newIngredient);
   } catch (error) {
     next(error);

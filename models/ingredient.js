@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const IngredientSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
   Ingredientimage: {
     type: String,
     default:
@@ -11,9 +10,9 @@ const IngredientSchema = new mongoose.Schema({
   recipes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Recipe",
+      ref: "recipe",
     },
   ],
 });
 
-module.exports = mongoose.model("Ingredient", IngredientSchema);
+module.exports = mongoose.model("ingredient", IngredientSchema);
