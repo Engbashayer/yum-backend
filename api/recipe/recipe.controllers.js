@@ -15,6 +15,8 @@ exports.recipesCreate = async (req, res, next) => {
       req.body.image = req.file.path.replace("\\", "/");
     }
     const newRecipe = await Recipe.create(req.body);
+    console.log("req.body");
+
     return res.status(201).json(newRecipe);
   } catch (error) {
     next(error);

@@ -68,6 +68,8 @@ exports.updateCategory = async (req, res) => {
 
 exports.addrecipeToCategory = async (req, res, next) => {
   try {
+    console.log(req.recipes);
+    console.log(req.category);
     await req.Category.updateOne({ $push: { recipes: req.recipes } });
     await req.Recipe.updateOne({ $push: { category: req.category } });
     res.status(204).end();

@@ -19,12 +19,8 @@ reciperouter.param("recipeId", async (req, res, next, recipeId) => {
 });
 
 reciperouter.get("/recipes", getAllRecipes);
-reciperouter.post(
-  "/",
 
-  upload.single("image"),
-  recipesCreate
-);
+reciperouter.post("/r", upload.single("image"), recipesCreate);
 
 reciperouter.delete("/:recipeId", recipesDelete);
 
