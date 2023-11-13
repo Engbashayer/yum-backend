@@ -63,13 +63,11 @@ exports.updateCategory = async (req, res, next) => {
 ////// DO NOT USE
 exports.addrecipeToCategory = async (req, res, next) => {
   try {
-    const foundRecipe = await Recipe.findById(req.body.recipeId);
-    const newcate = await req.category.updateOne({
-      $push: { reciepes: foundRecipe },
-    });
-    await foundRecipe.updateOne({ $push: { category: req.category } });
-    // await req.Recipe.updateOne({ $push: { category: req.category } });
-    return res.status(204).json(newcate);
+    console.log(req.recipes);
+    console.log(req.category);
+    await req.Category.updateOne({ $push: { recipes: req.recipes } });
+    await req.Recipe.updateOne({ $push: { category: req.category } });
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
