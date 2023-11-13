@@ -21,7 +21,7 @@ exports.signup = async (req, res, next) => {
   try {
     const hassMyPw = await hashPassWord(req.body.password);
     req.body.password = hassMyPw;
-    console.log(req.body);
+    // console.log(req.body);
     const newchef = await Chef.create(req.body);
     // const newChef = await Chef.create(req.body);
     // console.log(req.body);

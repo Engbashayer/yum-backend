@@ -21,7 +21,7 @@ ingredientRoutes.get("/", getAllingredients);
 
 ingredientRoutes.post(
   "/ing",
-
+  passport.authenticate("jwt", { session: false }),
   upload.single("image"),
 
   ingredientsCreate

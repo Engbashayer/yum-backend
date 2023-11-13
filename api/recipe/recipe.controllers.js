@@ -1,5 +1,8 @@
+const Category = require("../../models/Category");
 const Recipe = require("../../models/Recipe");
+const chef = require("../../models/chef");
 const ingredient = require("../../models/ingredient");
+const ingredientRoutes = require("../ingredient/ingredients.routes");
 
 exports.getAllRecipes = async (req, res) => {
   try {
@@ -10,12 +13,27 @@ exports.getAllRecipes = async (req, res) => {
   }
 };
 
+///// USE THIS ONE
 exports.recipesCreate = async (req, res, next) => {
   try {
     if (req.file) {
       req.body.image = req.file.path.replace("\\", "/");
     }
     const newRecipe = await Recipe.create(req.body);
+    await Category.findByIdAndUpdate(req.body.category, {
+      $push: { recipes: newRecipe._id },
+    });
+
+    await chef.findByIdAndUpdate(req.user._id, {
+      $push: { recipes: newRecipe._id },
+    });
+
+    newRecipe.ingredients.forEach(async (ingredientId) => {
+      await ingredient.findByIdAndUpdate(ingredientId, {
+        $push: { recipes: newRecipe._id },
+      });
+    });
+
     return res.status(201).json(newRecipe);
   } catch (error) {
     next(error);
@@ -54,7 +72,7 @@ exports.fetchRecipe = async (recipeId, next) => {
 };
 
 //addrecipetoingredients
-
+////// DO NOT USE
 exports.addingredientToRecipe = async (req, res, next) => {
   try {
     const foundIngredient = await ingredient.findById(req.body.ingredientId);

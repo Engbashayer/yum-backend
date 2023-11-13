@@ -22,7 +22,7 @@ reciperouter.param("recipeId", async (req, res, next, recipeId) => {
 reciperouter.get("/", getAllRecipes);
 reciperouter.post(
   "/r",
-
+  passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   recipesCreate
 );

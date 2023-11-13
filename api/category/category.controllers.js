@@ -60,11 +60,10 @@ exports.updateCategory = async (req, res, next) => {
     return next(error);
   }
 };
-
+////// DO NOT USE
 exports.addrecipeToCategory = async (req, res, next) => {
   try {
     const foundRecipe = await Recipe.findById(req.body.recipeId);
-
     const newcate = await req.category.updateOne({
       $push: { reciepes: foundRecipe },
     });
