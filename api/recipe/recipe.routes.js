@@ -20,8 +20,12 @@ reciperouter.param("recipeId", async (req, res, next, recipeId) => {
 });
 
 reciperouter.get("/", getAllRecipes);
-
-reciperouter.post("/r", upload.single("image"), recipesCreate);
+reciperouter.post(
+  "/r",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  recipesCreate
+);
 
 reciperouter.delete("/:recipeId", recipesDelete);
 
