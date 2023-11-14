@@ -4,9 +4,9 @@ const chef = require("../../models/chef");
 const ingredient = require("../../models/ingredient");
 const ingredientRoutes = require("../ingredient/ingredients.routes");
 
-exports.getAllRecipes = async (req, res) => {
+exports.getAllRecipes = async (req, res, next) => {
   try {
-    const recipes = await Recipe.find().populate("user");
+    const recipes = await Recipe.find().populate("user", "username");
     return res.status(201).json(recipes);
   } catch (err) {
     next(err);
@@ -19,7 +19,11 @@ exports.recipesCreate = async (req, res, next) => {
     if (req.file) {
       req.body.image = req.file.path.replace("\\", "/");
     }
-    const newRecipe = await Recipe.create(req.body);
+    const newRecipeData = {
+      ...req.body,
+      user: req.user._id,
+    };
+    const newRecipe = await Recipe.create(newRecipeData);
     await Category.findByIdAndUpdate(req.body.category, {
       $push: { recipes: newRecipe._id },
     });
