@@ -92,3 +92,13 @@ exports.addingredientToRecipe = async (req, res, next) => {
     next(error);
   }
 };
+
+// // for view recipe card ::
+// exports.getRecipeById= async (req, res, next)=>{
+// const recipeId = req.params._id
+// try {
+//   const recipe
+// } catch (error) {
+//   next(error)
+// }
+// }
