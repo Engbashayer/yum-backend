@@ -1,7 +1,7 @@
 const Chef = require("../../models/chef");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const chef = require("../../models/chef");
+const Recipe = require("../../models/Recipe");
 require("dotenv").config();
 
 const hashPassWord = async (pw) => {
@@ -22,6 +22,9 @@ exports.signup = async (req, res, next) => {
     const hassMyPw = await hashPassWord(req.body.password);
     req.body.password = hassMyPw;
     // console.log(req.body);
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
     const newchef = await Chef.create(req.body);
     // const newChef = await Chef.create(req.body);
     // console.log(req.body);
@@ -58,6 +61,7 @@ exports.recipeCreate = async (req, res, next) => {
   try {
     const newRecipe = await Recipe.create(req.body);
     await req.Chef.updateOne({ $push: { recipes: newRecipe } });
+
     res.status(201).json(req.chef);
   } catch (error) {
     next(error);
