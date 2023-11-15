@@ -11,6 +11,7 @@ const {
   fetchRecipe,
 
   addingredientToRecipe,
+  getMyRecipes,
 } = require("./recipe.controllers");
 
 reciperouter.param("recipeId", async (req, res, next, recipeId) => {
@@ -20,10 +21,15 @@ reciperouter.param("recipeId", async (req, res, next, recipeId) => {
 });
 
 reciperouter.get("/", getAllRecipes);
+reciperouter.get(
+  "/my-recipes",
+  passport.authenticate("jwt", { session: false }),
+  getMyRecipes
+);
 reciperouter.post(
   "/r",
   passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
+  upload.single("recipeimage"),
   recipesCreate
 );
 
