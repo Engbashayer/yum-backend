@@ -9,12 +9,9 @@ const {
   getChefs,
   recipeCreate,
 } = require("./chefs.controllers");
+const upload = require("../../middlewares/multer");
 
-router.post(
-  "/signup",
-
-  signup
-);
+router.post("/signup", upload.single("image"), signup);
 
 router.post(
   "/signin",

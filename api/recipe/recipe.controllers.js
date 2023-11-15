@@ -6,7 +6,12 @@ const ingredientRoutes = require("../ingredient/ingredients.routes");
 
 exports.getAllRecipes = async (req, res, next) => {
   try {
-    const recipes = await Recipe.find().populate("user", "username");
+    const recipes = await Recipe.find()
+      .populate({
+        path: "user",
+        select: "username",
+      })
+      .populate("category");
     return res.status(201).json(recipes);
   } catch (err) {
     next(err);
