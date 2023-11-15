@@ -22,12 +22,13 @@ exports.getAllRecipes = async (req, res, next) => {
 exports.recipesCreate = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.image = req.file.path.replace("\\", "/");
+      req.body.recipeimage = req.file.path.replace("\\", "/");
     }
     const newRecipeData = {
       ...req.body,
       user: req.user._id,
     };
+    // console.log(newRecipeData);
     const newRecipe = await Recipe.create(newRecipeData);
     await Category.findByIdAndUpdate(req.body.category, {
       $push: { recipes: newRecipe._id },
@@ -80,6 +81,17 @@ exports.fetchRecipe = async (recipeId, next) => {
   }
 };
 
+exports.getMyRecipes = async (req, res, next) => {
+  try {
+    const recipes = await Recipe.find({ user: req.user._id }).populate({
+      path: "user",
+      select: "username",
+    });
+    res.status(200).json(recipes);
+  } catch (error) {
+    next(error);
+  }
+};
 //addrecipetoingredients
 ////// DO NOT USE
 exports.addingredientToRecipe = async (req, res, next) => {
