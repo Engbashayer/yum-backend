@@ -25,15 +25,9 @@ app.use(passport.initialize());
 passport.use("local", localStrategy);
 passport.use("jwt", jWTStrategy);
 app.use("/api", chefRoutes);
-<<<<<<< HEAD
 app.use("/api/ingredients", ingredientRoutes);
 app.use("/api/categories", categoryrouter);
 app.use("/api/recipes", reciperouter);
-=======
-app.use("/api", ingredientRoutes);
-app.use("/api/category", categoryrouter);
-app.use("/api/singlerecipe", reciperouter);
->>>>>>> cb27278 (..)
 app.use(notFoundHandler);
 app.use(errorHandler);
 
