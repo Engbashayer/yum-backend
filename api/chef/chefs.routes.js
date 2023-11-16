@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 
-const router = express.Router();
+const chefrouter = express.Router();
 
 const {
   signup,
@@ -11,15 +11,15 @@ const {
 } = require("./chefs.controllers");
 const upload = require("../../middlewares/multer");
 
-router.post("/signup", upload.single("image"), signup);
+chefrouter.post("/signup", upload.single("image"), signup);
 
-router.post(
+chefrouter.post(
   "/signin",
   passport.authenticate("local", { session: false }),
   signin
 );
-router.get("/chefs", getChefs);
+chefrouter.get("/chefs", getChefs);
 
-router.post("/:chefId", recipeCreate);
+chefrouter.post("/:chefId", recipeCreate);
 
-module.exports = router;
+module.exports = chefrouter;
